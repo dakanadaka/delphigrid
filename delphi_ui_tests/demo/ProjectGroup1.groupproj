@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{367C6046-4500-4AAF-B5AD-3F3986BDF29A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="AutomationDemo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\tests\AutomationTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="AutomationDemo">
+        <MSBuild Projects="AutomationDemo.dproj"/>
+    </Target>
+    <Target Name="AutomationDemo:Clean">
+        <MSBuild Projects="AutomationDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AutomationDemo:Make">
+        <MSBuild Projects="AutomationDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AutomationTests">
+        <MSBuild Projects="..\tests\AutomationTests.dproj"/>
+    </Target>
+    <Target Name="AutomationTests:Clean">
+        <MSBuild Projects="..\tests\AutomationTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AutomationTests:Make">
+        <MSBuild Projects="..\tests\AutomationTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="AutomationDemo;AutomationTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="AutomationDemo:Clean;AutomationTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="AutomationDemo:Make;AutomationTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
